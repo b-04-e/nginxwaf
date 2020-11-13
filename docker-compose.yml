@@ -1,0 +1,16 @@
+version: '2'
+services:
+    ng2:
+        image: ng2
+        ports:
+            - "80:80"
+        restart: always
+        volumes:
+                - ./config/nginx.conf:/usr/local/nginx/conf/nginx.conf
+                - ./config/modsecurity.conf:/usr/local/nginx/conf/modsecurity.conf
+                - ./config/modsec_includes.conf:/usr/local/nginx/conf/modsec_includes.conf
+                - ./config/crs-setup.conf:/usr/local/nginx/conf/rules/crs-setup.conf
+                - ./fail2ban/jail.conf:/etc/fail2ban/jail.conf
+                - ./fail2ban/jail.conf:/etc/fail2ban/jail.local
+                - ./fail2ban/filter.d/:/etc/fail2ban/filter.d/
+                - ./logs/fail2ban.log:/var/log/fail2ban.log
