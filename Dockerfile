@@ -50,7 +50,8 @@ RUN mv /usr/local/nginx/conf/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.e
 # fail2ban instalacion
 
 RUN apk add fail2ban
-
+RUN rm /etc/fail2ban/jail.d/alpine-ssh.conf
+RUN fail2ban-server
 
 # start nginx and expose 80 port / inicio nginx y expongo el puerto 80
 
