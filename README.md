@@ -10,7 +10,7 @@ Next, I explain how to quickly install this solution:
  - Requirements: Docker, Docker-Compose
 - Clone the repository to download:
    $ git clone https://github.com/b-04-e/nginxwaf
-- Enter the nginxwaf / config directory, edit the nginx.conf file and add the blocks of your servers, if you don't, nginx raises a default index.html page.
+- Enter the nginxwaf/config directory, edit the nginx.conf file and add the blocks of your servers, if you don't, nginx raises a default index.html page.
 - Run:
  $ docker-compose up -d
 - The image will be created and started automatically listening on port 80, you can access to test by placing http://ip.docker
@@ -21,10 +21,10 @@ Config folder: contains the nginx and modsecurity configuration files.
 Fail2ban folder: contains the fail2ban service configuration files
 Logs folder: contains the logs nginx (access.log and error.log), ModSecurity (modsec_audit.log) and fail2ban (fail2ban.log)
 
-You can quickly test the operation of this reverse proxy / web server by doing:
+You can quickly test the operation of this reverse proxy/web server by doing:
 
 $ docker-compose up -d
-$ curl "http://localhost/index.html?t=<script>window.alert\(" hello "\)</script>"
+$ curl "http://localhost/index.html?t=<script>window.alert\("hello"\)</script>"
 
 And you get as a result, the lock:
 
