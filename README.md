@@ -1,4 +1,5 @@
 English / Spanish
+-----------------
 
 Hello! This is an alpine-based nginx image. It has ModSecurity activated that works like WAF.
 It also has fail2ban to prevent DDoS attacks and more.
@@ -38,6 +39,13 @@ $ cat logs / modsec_audit.log
 --- 5s3V5xAh --- H--
 ModSecurity: Warning. detected XSS using libinjection. [file "/usr/local/nginx/conf/rules/REQUEST-941-APPLICATION-ATTACK-XSS.conf"] [line "37"] [id "941100"] [rev ""] [msg "XSS Attack Detected via libinjection "] [data" Matched Data: XSS data found within ARGS: t: <script> window.alert (hello) </script> "] [severity" 2 "] [see" OWASP_CRS / 3.2.0 "] [ maturity "0"] [accuracy "0"] [tag "application-multi"] [tag "language-multi"] [tag "platform-multi"] [tag "attack-xss"] [tag "paranoia-level / 1 "] [tag" OWASP_CRS "] [tag" OWASP_CRS / WEB_ATTACK / XSS "] [tag" WASCTC / WASC-8 "] [tag" WASCTC / WASC-22 "] [tag" OWASP_TOP_10 / A3 "] [tag" OWASP_AppSensor / IE1 "] [tag" CAPEC-242 "] [hostname" 172.19.0.2 "] [uri" /index.html "] [unique_id" 1605319184 "] [ref" v18,37t: utf8toUnicode, t: urlDecodeUni, t : htmlEntityDecode, t: jsDecode, t: cssDecode, t: removeNulls "]
 ModSecurity: Warning. Matched "Operator` Rx 'with parameter `(? I) <script [^>] *> [\ s \ S] *?' against variable `ARGS: t '(Value:` <script> window.alert \ (hello \) </script>') [file "/ usr / local / nginx / conf / rules / REQUEST-941-APPLICATION-ATTACK- XSS.conf "] [line" 68 "] [id" 941110 "] [rev" "] [msg" XSS Filter - Category 1: Script Tag Vector "] [data" Matched Data: <script> found within ARGS: t : <script> window.alert (hello) </script> "] [severity" 2 "] [see" OWASP_CRS / 3.2.0 "] [maturity" 0 "] [accuracy" 0 "] [tag" application-multi "] [" language-multi "tag] [" platform-multi "tag] [" attack-xss "tag] [" paranoia-level / 1 "tag] [" OWASP_CRS "tag] [" OWASP_CRS / WEB_ATTACK / XSS tag "] [tag" WASCTC / WASC-8 "] [tag" WASCTC / WASC-22 "] [tag" OWASP_TOP_10 / A3 "] [tag" OWASP_AppSensor / IE1 "] [tag" CAPEC-242 "] [hostname" 172.19 .0.2 "] [uri" /index.html "] [unique_id" 1605319184 "] [ref" o0,8v18,37t: utf8toUnicode, t: urlDecodeUni, t: htmlEntityDecode, t: jsDecode, t: cssDecode, t: removeNulls " ]
+
+
+If you try to stress test or refresh the site many times, nginx will give a 500 error and IPTABLES will place a temporary ban using fail2ban.
+
+It is a good solution to quickly implement a reverse proxy, with built-in WAF and DOS protection.
+
+The idea is to add things, such as load balancing, cache and some manager of the .config files, contributions are welcome.
 
 -----------------------------------------------------------------------
 
@@ -80,3 +88,9 @@ $ cat logs/modsec_audit.log
 ---5s3V5xAh---H--
 ModSecurity: Warning. detected XSS using libinjection. [file "/usr/local/nginx/conf/rules/REQUEST-941-APPLICATION-ATTACK-XSS.conf"] [line "37"] [id "941100"] [rev ""] [msg "XSS Attack Detected via libinjection"] [data "Matched Data: XSS data found within ARGS:t: <script>window.alert(hola)</script>"] [severity "2"] [ver "OWASP_CRS/3.2.0"] [maturity "0"] [accuracy "0"] [tag "application-multi"] [tag "language-multi"] [tag "platform-multi"] [tag "attack-xss"] [tag "paranoia-level/1"] [tag "OWASP_CRS"] [tag "OWASP_CRS/WEB_ATTACK/XSS"] [tag "WASCTC/WASC-8"] [tag "WASCTC/WASC-22"] [tag "OWASP_TOP_10/A3"] [tag "OWASP_AppSensor/IE1"] [tag "CAPEC-242"] [hostname "172.19.0.2"] [uri "/index.html"] [unique_id "1605319184"] [ref "v18,37t:utf8toUnicode,t:urlDecodeUni,t:htmlEntityDecode,t:jsDecode,t:cssDecode,t:removeNulls"]
 ModSecurity: Warning. Matched "Operator `Rx' with parameter `(?i)<script[^>]*>[\s\S]*?' against variable `ARGS:t' (Value: `<script>window.alert\(hola\)</script>' ) [file "/usr/local/nginx/conf/rules/REQUEST-941-APPLICATION-ATTACK-XSS.conf"] [line "68"] [id "941110"] [rev ""] [msg "XSS Filter - Category 1: Script Tag Vector"] [data "Matched Data: <script> found within ARGS:t: <script>window.alert(hola)</script>"] [severity "2"] [ver "OWASP_CRS/3.2.0"] [maturity "0"] [accuracy "0"] [tag "application-multi"] [tag "language-multi"] [tag "platform-multi"] [tag "attack-xss"] [tag "paranoia-level/1"] [tag "OWASP_CRS"] [tag "OWASP_CRS/WEB_ATTACK/XSS"] [tag "WASCTC/WASC-8"] [tag "WASCTC/WASC-22"] [tag "OWASP_TOP_10/A3"] [tag "OWASP_AppSensor/IE1"] [tag "CAPEC-242"] [hostname "172.19.0.2"] [uri "/index.html"] [unique_id "1605319184"] [ref "o0,8v18,37t:utf8toUnicode,t:urlDecodeUni,t:htmlEntityDecode,t:jsDecode,t:cssDecode,t:removeNulls"]
+
+Si intentas hacer pruebas de stress o refrescar muchas veces el sitio, nginx dara un error 500 y IPTABLES colocara un ban temporal utilizando fail2ban.
+
+Es una buena solucion para implementar rapidamente un proxy reverso, con WAF incorporado y proteccion DOS.
+
+La idea es ir agregando cosas, como load balancing, cache y algun manager de los archivos .config , son bienvenidos los aportes.
