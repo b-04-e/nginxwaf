@@ -15,3 +15,6 @@ services:
                 - ./fail2ban/filter.d/:/etc/fail2ban/filter.d/
                 - ./logs/fail2ban.log:/var/log/fail2ban.log
                 - ./logs/:/var/log/
+        cap_add:
+                - NET_ADMIN
+                - NET_RAW
