@@ -1,7 +1,7 @@
 version: '2'
 services:
-    ng2:
-        image: ng2
+    nginxwaf:
+        build: .
         ports:
             - "80:80"
         restart: always
