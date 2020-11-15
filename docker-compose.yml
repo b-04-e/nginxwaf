@@ -13,7 +13,10 @@ services:
                 - ./fail2ban/jail.conf:/etc/fail2ban/jail.conf
                 - ./fail2ban/jail.conf:/etc/fail2ban/jail.local
                 - ./fail2ban/filter.d/:/etc/fail2ban/filter.d/
+                - ./logs/access.log:/usr/local/nginx/logs/access.log
+                - ./logs/error.log:/usr/local/nginx/logs/error.log
                 - ./logs/:/var/log/
+
         cap_add:
                 - NET_ADMIN
                 - NET_RAW
