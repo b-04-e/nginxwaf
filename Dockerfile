@@ -2,6 +2,7 @@ FROM alpine:latest
 Label manteiner="Ernesto Rode aka b-04 ernesto@erconsultor.com"
 # packages needed to compile / paquetes necesarios para compilar
 
+RUN apk update && apk upgrade
 RUN apk add --update wget \
 	tar \
 	autoconf \
@@ -51,9 +52,11 @@ RUN mv /usr/local/nginx/conf/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.e
 
 RUN apk add fail2ban
 RUN rm /etc/fail2ban/jail.d/alpine-ssh.conf
-RUN fail2ban-server
 
-# start nginx and expose 80 port / inicio nginx y expongo el puerto 80
+# start nginx and fail2ban. expose 80 port for nginx / inicio nginx y fail2ban. expongo el puerto 80 para nginx
 
-CMD ./usr/local/nginx/sbin/nginx -g 'daemon off;'	
+CMD ./usr/local/nginx/sbin/nginx -g 'daemon off;'
+CMD [ "fail2ban-server", "-f", "-x", "-v", "start" ]
+
+
 EXPOSE 80
