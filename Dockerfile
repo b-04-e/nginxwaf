@@ -1,5 +1,5 @@
 FROM alpine:latest
-Label manteiner="Ernesto Rode aka b-04 ernesto@erconsultor.com"
+Label manteiner="Ernesto Rode aka b-04 <ernesto@erconsultor.com>"
 # packages needed to compile / paquetes necesarios para compilar
 
 RUN apk update && apk upgrade
